@@ -1,6 +1,6 @@
 import { Column, PrimaryGeneratedColumn, Entity, OneToOne } from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import { User } from '../../user/entities/user.entity';
+import type { User } from '../../user/entities/user.entity';
 
 @Entity('role')
 export class Role {
@@ -27,7 +27,7 @@ export class Role {
   mark: string;
 
   @ApiProperty({ description: '创建者' })
-  @OneToOne(() => User, (user) => user?.userName)
+  @OneToOne('User', 'userName')
   creator: User;
 
   @Column({

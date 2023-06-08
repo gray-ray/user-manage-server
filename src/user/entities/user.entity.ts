@@ -8,7 +8,7 @@ import {
 import * as dayjs from 'dayjs';
 import * as bcrypt from 'bcrypt';
 import { ApiProperty } from '@nestjs/swagger';
-
+import { Role } from '../../role/entities/role.entity';
 import { Exclude } from 'class-transformer';
 
 // 实体序列化 转换返回 可以隐藏字段
@@ -41,9 +41,8 @@ export class User {
   @Column({ default: null })
   email: string;
 
-  @ApiProperty({ type: String })
-  @Column({ default: 'visitor' })
-  roles: string;
+  @OneToMany(() => Role, (role) => role)
+  roles: Role[];
 
   @Column({
     name: 'create_time',

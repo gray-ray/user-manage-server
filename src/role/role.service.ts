@@ -1,5 +1,5 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository } from '@nestjs/typeorm';
+import { InjectRepository, } from '@nestjs/typeorm';
 import { Repository, In } from 'typeorm';
 import { Role } from './entities/role.entity';
 import { CreateRoleDto } from './dto/create-role.dto';
@@ -9,7 +9,8 @@ import { UpdateRoleDto } from './dto/update-role.dto';
 export class RoleService {
   constructor(
     @InjectRepository(Role)
-    private readonly roleRepository: Repository<Role>){}
+    private readonly roleRepository: Repository<Role>,
+  ) {}
 
   async create(user, createRoleDto: CreateRoleDto) {
     const { roleName } = createRoleDto;

@@ -1,5 +1,6 @@
 import { IsNotEmpty, IsEmail, IsUrl } from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger'; // swagger 字段添加熟悉说明
+import { Role } from '../../role/entities/role.entity';
 
 export class CreateUserDto {
   @IsNotEmpty({ message: '用户名不能为空' })
@@ -18,6 +19,7 @@ export class CreateUserDto {
   readonly password: string;
 
   // 属性为数组的时候必须手动指定数组类型
-  @ApiProperty({ type: String })
-  readonly roles: string;
+  // Role creator 出现循环依赖项
+  @ApiProperty({ type: Role })
+  readonly roles: Role[];
 }
