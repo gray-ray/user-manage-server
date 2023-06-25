@@ -32,7 +32,7 @@ export class UserController {
   @ApiBearerAuth()
   @UseGuards(AuthGuard('jwt'))
   @Post('getUser')
-  @ApiResponse({ status: 200, type: [User] })
+  // @ApiResponse({ status: 200, type: [User] })
   getUser(@Req() req) {
     return req.user;
   }

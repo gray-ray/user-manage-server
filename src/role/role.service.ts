@@ -1,5 +1,5 @@
 import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
-import { InjectRepository, } from '@nestjs/typeorm';
+import { InjectRepository } from '@nestjs/typeorm';
 import { Repository, In } from 'typeorm';
 import { Role } from './entities/role.entity';
 import { CreateRoleDto } from './dto/create-role.dto';
@@ -18,15 +18,21 @@ export class RoleService {
     if (exitRole) {
       throw new HttpException('角色已存在', HttpStatus.BAD_REQUEST);
     }
+
     const roleParam = {
       ...createRoleDto,
-      creator: user,
+      user,
     };
-    const newRole: Role = await this.roleRepository.create(roleParam);
+    // console.log(user, roleParam);
+    const newRole: Role = this.roleRepository.create(createRoleDto);
     const created = await this.roleRepository.save(newRole);
     return { ...created };
   }
 
+  async findByIds(ids: string[]) {
+    // .findBy({ id: In([1, 2, 3]) })
+    return this.roleRepository.findBy({ id: In([...ids]) });
+  }
 
   // findAll() {
   //   return `This action returns all role`;

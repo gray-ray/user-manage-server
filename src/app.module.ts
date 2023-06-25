@@ -5,6 +5,7 @@ import { UserModule } from './user/user.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigService, ConfigModule } from '@nestjs/config';
 import { RoleModule } from './role/role.module';
+import { AuthModule } from './auth/auth.module';
 import envPath from '../env.path';
 
 @Module({
@@ -32,6 +33,7 @@ import envPath from '../env.path';
       },
     }),
     RoleModule,
+    AuthModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,10 +1,4 @@
-import {
-  Column,
-  Entity,
-  PrimaryGeneratedColumn,
-  OneToMany,
-  BeforeInsert,
-} from 'typeorm';
+import { Column, Entity, PrimaryGeneratedColumn, BeforeInsert } from 'typeorm';
 import * as dayjs from 'dayjs';
 import * as bcrypt from 'bcrypt';
 import { ApiProperty } from '@nestjs/swagger';
@@ -20,10 +14,8 @@ import { Exclude } from 'class-transformer';
 @Entity('user')
 export class User {
   @ApiProperty({ description: '用户ID' })
-  @PrimaryGeneratedColumn('uuid', {
-    name: 'user_id',
-  })
-  userId: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @Column({ length: 100, name: 'user_name' })
   userName: string;
@@ -41,8 +33,8 @@ export class User {
   @Column({ default: null })
   email: string;
 
-  @OneToMany(() => Role, (role) => role)
-  roles: Role[];
+  @Column({ default: '' })
+  role: string;
 
   @Column({
     name: 'create_time',

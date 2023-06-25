@@ -8,8 +8,6 @@ import { UserService } from '../user/user.service';
 @Module({
   controllers: [RoleController],
   providers: [RoleService, UserService],
-  imports: [
-    TypeOrmModule.forFeature([User, Role]),
-  ],
+  imports: [TypeOrmModule.forFeature([User, Role])],
 })
 export class RoleModule {}

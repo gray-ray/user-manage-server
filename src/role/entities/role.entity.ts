@@ -1,21 +1,19 @@
-import { Column, PrimaryGeneratedColumn, Entity, OneToOne } from 'typeorm';
+import { Column, PrimaryGeneratedColumn, Entity, OneToOne, ManyToOne} from 'typeorm';
 import { ApiProperty } from '@nestjs/swagger';
-import type { User } from '../../user/entities/user.entity';
+import { User } from '../../user/entities/user.entity';
 
 @Entity('role')
 export class Role {
   @ApiProperty({ description: '角色ID' })
-  @PrimaryGeneratedColumn('uuid', {
-    name: 'role_id',
-  })
-  roleId: string;
+  @PrimaryGeneratedColumn('uuid')
+  id: string;
 
   @ApiProperty({ description: '角色名称' })
   @Column({ name: 'role_name' })
   roleName: string;
 
   @ApiProperty({ description: '角色Code' })
-  @Column({ name: 'role_Code' })
+  @Column({ name: 'role_code' })
   roleCode: string;
 
   @ApiProperty({ description: '角色状态' })
@@ -25,10 +23,6 @@ export class Role {
   @ApiProperty({ description: '备注' })
   @Column({ length: 500 })
   mark: string;
-
-  @ApiProperty({ description: '创建者' })
-  @OneToOne('User', 'userName')
-  creator: User;
 
   @Column({
     name: 'create_time',

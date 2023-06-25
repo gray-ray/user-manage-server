@@ -7,6 +7,7 @@ import {
   Param,
   Delete,
   Req,
+  UseGuards,
 } from '@nestjs/common';
 import { RoleService } from './role.service';
 import { CreateRoleDto } from './dto/create-role.dto';
@@ -27,6 +28,7 @@ export class RoleController {
   @ApiOperation({ description: '新增角色' })
   @ApiBearerAuth()
   @Post('create')
+  @UseGuards(AuthGuard('jwt')) // 通过jwt获取用户信息 @Req() req
   @ApiResponse({ status: 200, type: [Role] })
   create(@Body() createRoleDto: CreateRoleDto, @Req() req) {
     return this.roleService.create(req.user, createRoleDto);

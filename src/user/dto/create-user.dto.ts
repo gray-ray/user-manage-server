@@ -19,7 +19,6 @@ export class CreateUserDto {
   readonly password: string;
 
   // 属性为数组的时候必须手动指定数组类型
-  // Role creator 出现循环依赖项
-  @ApiProperty({ type: Role })
-  readonly roles: Role[];
+  @ApiProperty({ description: '角色' })
+  readonly roles: string;
 }
